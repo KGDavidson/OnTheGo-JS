@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    height: 100vh;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.map {
+    height: 100vh;
+    width: 80vw;
+}
+
+.search {
+    background-image: url(imgs/searchIcon.png);
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-origin: content-box;
+    border-radius: 4px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    padding: 15px 20px;
+    border-color: transparent;
+    font-size: 15px;
+}
+
+.search:focus {
+    outline: 0px;
+}
+
+::placeholder {
+    color: #c2c2c2;
+    font-family: "Roboto", sans-serif;
+
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #c2c2c2;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #c2c2c2;
+}
