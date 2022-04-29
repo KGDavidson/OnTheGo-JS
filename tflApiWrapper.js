@@ -1,5 +1,5 @@
 const getNearbyStops = async (lat, lon) => {
-    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/?lat=${lat}&lon=${lon}&stopTypes=NaptanPublicBusCoachTram,NaptanBusCoachStation,NaptanRailStation,NaptanMetroStation&radius=400&modes=bus,dlr,national-rail,overground,tube`;
+    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/?lat=${lat}&lon=${lon}&stopTypes=NaptanPublicBusCoachTram,NaptanBusCoachStation,NaptanRailStation,NaptanMetroStation&radius=1500&modes=bus,dlr,national-rail,overground,tube`;
     var response = await fetch(endpointUrl);
     var json = await response.json();
 

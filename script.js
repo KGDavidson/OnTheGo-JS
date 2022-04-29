@@ -24,17 +24,25 @@ const tiles = new L.tileLayer(
 map.setView(map.getCenter(), 17);
 
 console.log(map.getCenter());
-/*getNearbyStops(map.getCenter().lat, map.getCenter().lng).then((nearbyStops) => {
-    console.log(nearbyStops);
-    nearbyStops.map((stop) => {
-        addStopMarker(stop.lat, stop.lng, stop.mode);
-    });
-});*/
+const addNearbyStopsToMap = () => {
+    getNearbyStops(map.getCenter().lat, map.getCenter().lng).then(
+        (nearbyStops) => {
+            console.log(nearbyStops);
+            nearbyStops.map((stop) => {
+                addStopMarker(stop.lat, stop.lng, stop.mode);
+            });
+        }
+    );
+};
 
 const getUserLocation = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-            console.log(position);
+            map.setView(
+                [position.coords.latitude, position.coords.longitude],
+                map.zoom
+            );
+            addNearbyStopsToMap();
         });
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
