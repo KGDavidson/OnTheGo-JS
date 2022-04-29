@@ -1,9 +1,11 @@
 var map = L.map("map", {
     center: [51.507209, -0.127614],
-    zoom: 10,
+    minZoom: 11,
+    maxZoom: 17,
+    zoom: 17,
 });
 
-var mapBounds = L.latLngBounds([
+const mapBounds = L.latLngBounds([
     [51.944653, -0.756512],
     [51.031025, 0.721172],
 ]);
@@ -11,23 +13,48 @@ map.fitBounds(mapBounds);
 
 map.setMaxBounds(map.getBounds());
 
-var tiles = new L.tileLayer(
+const tiles = new L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
     {
         attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        minZoom: "11",
     }
 ).addTo(map);
 
-function showPosition(position) {
-    addMarker(51.507209, -0.127614);
-}
+map.setView(map.getCenter(), 17);
 
-function addMarker(lat, lng) {
+console.log(map.getCenter());
+/*getNearbyStops(map.getCenter().lat, map.getCenter().lng).then((nearbyStops) => {
+    console.log(nearbyStops);
+    nearbyStops.map((stop) => {
+        addStopMarker(stop.lat, stop.lng, stop.mode);
+    });
+});*/
+
+const getUserLocation = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            console.log(position);
+        });
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+};
+
+const showPosition = (position) => {
+    addMarker(51.507209, -0.127614);
+};
+
+const addStopMarker = (lat, lng, mode) => {
+    console.log(lat, lng, mode);
+    addMarker(lat, lng, mode);
+};
+
+const addMarker = (lat, lng, icon) => {
     if (map.getBounds().contains([lat, lng])) {
         var century21icon = L.icon({
-            iconUrl: "imgs/userLocationMarker.png",
+            iconUrl:
+                icon == 0 ? "imgs/busHighlight.png" : "imgs/trainHighlight.png",
             iconSize: [30, 30],
         });
         var marker = L.marker([lat, lng], {
@@ -35,11 +62,10 @@ function addMarker(lat, lng) {
             icon: century21icon,
         });
 
-        marker
-            .addTo(map)
+        marker.addTo(map); /*
             .bindPopup(
                 "<p1><b>The White House</b><br>Landmark, historic home & office of the United States president, with tours for visitors.</p1>"
             )
-            .openPopup();
+            .openPopup();*/
     }
-}
+};

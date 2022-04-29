@@ -19,17 +19,7 @@ body {
 }
 
 .search {
-    background-image: url(imgs/searchIcon.png);
-    background-position: left;
-    background-repeat: no-repeat;
-    background-size: 18px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    padding: 0 5px;
-    padding-left: 30px;
-    font-size: 15px;
-    border-radius: 15px;
-    border-width: 15px;
-    border-color: transparent;
+    width: 100%;
 }
 
 .search:focus {
