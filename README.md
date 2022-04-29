@@ -2,7 +2,7 @@
 
 A web app for viewing TFL departure times made using ReactJS
 
-https://www.flaticon.com/authors/royyan-wijaya
+https://www.flaticon.com/authors/smashicons
 ReactJs
 Leaflet
 https://carto.com/basemaps/

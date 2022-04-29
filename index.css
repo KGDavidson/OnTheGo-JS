@@ -20,15 +20,16 @@ body {
 
 .search {
     background-image: url(imgs/searchIcon.png);
-    background-position: right;
+    background-position: left;
     background-repeat: no-repeat;
-    background-size: 18px 18px;
-    background-origin: content-box;
-    border-radius: 4px;
+    background-size: 18px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    padding: 15px 20px;
-    border-color: transparent;
+    padding: 0 5px;
+    padding-left: 30px;
     font-size: 15px;
+    border-radius: 15px;
+    border-width: 15px;
+    border-color: transparent;
 }
 
 .search:focus {
@@ -36,8 +37,8 @@ body {
 }
 
 ::placeholder {
-    color: #c2c2c2;
-    font-family: "Roboto", sans-serif;
+    color: black;
+    font-family: "Roboto Light", sans-serif;
 
     opacity: 1;
 }

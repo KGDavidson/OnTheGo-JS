@@ -20,15 +20,7 @@ var tiles = new L.tileLayer(
     }
 ).addTo(map);
 
-/*if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-} else {
-    console.log("Geolocation is not supported by this browser.");
-}*/
-
 function showPosition(position) {
-    //addMarker(position.coords.latitude, position.coords.longitude);
-
     addMarker(51.507209, -0.127614);
 }
 
