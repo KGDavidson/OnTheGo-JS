@@ -1,5 +1,5 @@
 const getNearbyStops = async (lat, lon) => {
-    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/?lat=${lat}&lon=${lon}&stopTypes=NaptanPublicBusCoachTram,NaptanBusCoachStation,NaptanRailStation,NaptanMetroStation&radius=1500&modes=bus,dlr,national-rail,overground,tube`;
+    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/?lat=${lat}&lon=${lon}&stopTypes=TransportInterchange,NaptanMetroStation,NaptanRailStation,NaptanBusCoachStation,NaptanFerryPort,NaptanPublicBusCoachTram&modes=tube,bus,coach,overground,dlr,cable-car,national-rail,river-bus,river-tour,tram&returnLines=false&radius=1000`;
     var response = await fetch(endpointUrl);
     var json = await response.json();
 
@@ -14,12 +14,29 @@ const getNearbyStops = async (lat, lon) => {
         ) {
             mode = 1;
         }
+        var towards = "";
+
+        var towards = (
+            e.additionalProperties.find((e) => e.key == "Towards") || {
+                value: "",
+            }
+        ).value;
+        if (towards) {
+            towards = "towards " + towards;
+        }
         return {
             lat: e.lat,
             lng: e.lon,
             indicator:
-                "indicator" in e ? e.indicator.replace("Stop ", "") : null,
+                "indicator" in e
+                    ? e.indicator
+                          .replace("Stop ", "")
+                          .replace("-bound", "")
+                          .replace("Stand ", "")
+                          .replace("Stop", "")
+                    : "-",
             id: e.id,
+            towards: towards,
             naptanId: e.naptanId,
             name: e.commonName,
             lines: e.lines.map((e) => {

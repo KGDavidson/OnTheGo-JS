@@ -1,3 +1,5 @@
+var currentNearbyStops = [];
+
 var map = L.map("map", {
     center: [51.507209, -0.127614],
     minZoom: 11,
@@ -27,12 +29,53 @@ console.log(map.getCenter());
 const addNearbyStopsToMap = () => {
     getNearbyStops(map.getCenter().lat, map.getCenter().lng).then(
         (nearbyStops) => {
-            console.log(nearbyStops);
-            nearbyStops.map((stop) => {
-                addStopMarker(stop.lat, stop.lng, stop.mode);
-            });
+            currentNearbyStops = nearbyStops;
+            setNearbyStops();
         }
     );
+};
+
+addNearbyStopsToMap();
+
+const setNearbyStops = () => {
+    clearStopsList();
+    currentNearbyStops.map((stop, index) => {
+        addStopToStopsList(
+            index,
+            stop.indicator,
+            stop.name,
+            stop.towards,
+            stop.lines
+        );
+        addStopMarker(index, stop.lat, stop.lng, stop.mode);
+    });
+};
+
+const clearStopsList = () => {
+    var stopsList = document.getElementById("stopsList");
+    stopsList.innerHTML = "";
+};
+
+const addStopToStopsList = (index, indicator, name, towards, lines) => {
+    var stopsList = document.getElementById("stopsList");
+    var linesHTML = "";
+    lines.forEach((line) => {
+        linesHTML += `<div class="line"> ${line.name} </div>`;
+    });
+    stopsList.innerHTML += `
+        <div class="stop" onclick="">
+            <div class="header">
+                <div class="stopLetter">${indicator}</div>
+                <div class="info">
+                    <div class="stopName"><span>${name}</span></div>
+                    <div class="towards">${towards}</div>
+                </div>
+            </div>
+            <div class="lines">
+                ${linesHTML}
+            </div>
+        </div>
+    `;
 };
 
 const getUserLocation = () => {
@@ -53,8 +96,7 @@ const showPosition = (position) => {
     addMarker(51.507209, -0.127614);
 };
 
-const addStopMarker = (lat, lng, mode) => {
-    console.log(lat, lng, mode);
+const addStopMarker = (index, lat, lng, mode) => {
     addMarker(lat, lng, mode);
 };
 
