@@ -10,7 +10,7 @@ A web app for viewing TFL departure times made using JavaScript and powered by t
 
 -   Use of geolocation to get user location
 -   TFL API
-    -   Get all nearby stops
+    -   Get nearby stops
     -   Get departure times for a particular stop
 -   Leaflet is used for serving maps
 -   CartoCDN for tile serving
@@ -54,19 +54,7 @@ This project is licensed under the terms of the **MIT** license.
 
 -   [ReactJS](https://reactjs.org/)
 -   [Leaflet](https://leafletjs.com/)
+-   [Carto CDN](https://carto.com/basemaps/)
 -   [Google Icons](https://www.flaticon.com/authors/google)
 -   [SmashIcons](https://www.flaticon.com/authors/smashicons)
 -   [UI Inspiration](https://dribbble.com/shots/14420230-Public-Transport-App-Design)
-
-# OnTheGo-ReactJS
-
-A web app for viewing TFL departure times made using ReactJS
-
-https://kgdavidson.github.io/OnTheGo-JS/
-
-https://www.flaticon.com/authors/google
-https://www.flaticon.com/authors/smashicons
-ReactJs
-Leaflet
-https://carto.com/basemaps/
-https://dribbble.com/shots/14420230-Public-Transport-App-Design
