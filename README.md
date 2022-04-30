@@ -1,40 +1,38 @@
 # OnTheGo-JS
 
-A web app for viewing TFL departure times made using JavaScript and powered by the TFL API and Leaflet
+A web app for viewing TFL departure times made using JavaScript and powered by the TFL API, CartoCDN and Leaflet
 
-![UI](https://i.postimg.cc/d15pnZJg/GIF-30-04-2022-16-57-09.gif)
-![UI](https://i.postimg.cc/J4r4ThyR/Screenshot-2022-04-30-124330.png)
+![UI](https://i.postimg.cc/76NGRDRF/GIF-30-04-2022-17-02-50.gif)
 
 ---
 
 ## Features
 
--   A random paragraph is selected for typing from the paragraphs JSON file
--   localStorage is used to store and report independent highscores for cpm and wpm
--   Countdown clock for timing typing test
--   Timer begins when the user starts to type
--   Typing stats are calculated at the end and presented in an organised way
--   Highlights characters that were typed correctly, incorrectly or fixed in their respective colours
+-   Use of geolocation to get user location
+-   TFL API
+    -   Get all nearby stops
+    -   Get departure times for a particular stop
+-   Leaflet is used for serving maps
+-   CartoCDN for tile serving
+-   The center of London is the default map location
 
 ---
 
 ## Demo
 
--   Demo available at https://kgdavidson.github.io/TypingSpeedTest-ReactJS/
+-   Demo available at https://kgdavidson.github.io/OnTheGo-JS/
 
 ---
 
 ## Setup
 
-Clone this repo to your desktop and run `npm install` in the `typingtest` directory to install all the dependencies.
+Clone this repo to your desktop.
 
 ---
 
 ## Usage
 
-Once the dependencies are installed, you can run `npm start` in the `typingtest` directory to start the application.
-
-You will then be able to access it at localhost:3000
+Open the `index.html` file in your preferred browser.
 
 ---
 
@@ -55,8 +53,10 @@ This project is licensed under the terms of the **MIT** license.
 ## Acknowledgments
 
 -   [ReactJS](https://reactjs.org/)
--   [paragraphs.json](https://randomwordgenerator.com/json/paragraphs.json)
--   [UI Inspiration](https://dribbble.com/shots/17809623-Create-a-Typewriter-Effect-Using-Variables-and-Formulas)
+-   [Leaflet](https://leafletjs.com/)
+-   [Google Icons](https://www.flaticon.com/authors/google)
+-   [SmashIcons](https://www.flaticon.com/authors/smashicons)
+-   [UI Inspiration](https://dribbble.com/shots/14420230-Public-Transport-App-Design)
 
 # OnTheGo-ReactJS
 
@@ -66,7 +66,6 @@ https://kgdavidson.github.io/OnTheGo-JS/
 
 https://www.flaticon.com/authors/google
 https://www.flaticon.com/authors/smashicons
-https://www.freepik.com
 ReactJs
 Leaflet
 https://carto.com/basemaps/
