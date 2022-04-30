@@ -1,4 +1,5 @@
 var currentNearbyStops = [];
+var currentStop = -1;
 
 var map = L.map("map", {
     center: [51.507209, -0.127614],
@@ -56,14 +57,65 @@ const clearStopsList = () => {
     stopsList.innerHTML = "";
 };
 
+const setCurrentStop = (index) => {
+    currentStop = currentNearbyStops[index];
+    document.getElementById("stopsList").style.display = "none";
+    document.getElementById("departures").style.display = "block";
+
+    const departures = document.getElementById("departures");
+    var linesHTML = "";
+    console.log(currentStop);
+    currentStop.lines.forEach((line) => {
+        linesHTML += `<div class="line"> ${line.name} </div>`;
+    });
+    departures.innerHTML += `
+        <div class="stop">
+            <div class="header">
+                <div class="stopLetter">${currentStop.indicator}</div>
+                <div class="info">
+                    <div class="stopName"><span>${currentStop.name}</span></div>
+                    <div class="towards">${currentStop.towards}</div>
+                </div>
+            </div>
+            <div class="lines">
+                ${linesHTML}
+            </div>
+        </div>
+    `;
+
+    getStopDepartures(currentStop).then((stopDepartures) => {
+        stopDepartures.map((stop) => {
+            addDeparturesToDeparturesList(
+                stop.name,
+                stop.destination,
+                stop.mins
+            );
+        });
+    });
+};
+
+const addDeparturesToDeparturesList = (name, destination, mins) => {
+    const departures = document.getElementById("departures");
+    departures.innerHTML += `
+        <div class="departure">
+            <div class="header">
+                <div class="info">
+                    <div class="stopName"><span>${name}</span></div>
+                    <div class="destination">${destination}</div>
+                </div>
+            </div>
+        </div>
+    `;
+};
+
 const addStopToStopsList = (index, indicator, name, towards, lines) => {
-    var stopsList = document.getElementById("stopsList");
+    const stopsList = document.getElementById("stopsList");
     var linesHTML = "";
     lines.forEach((line) => {
         linesHTML += `<div class="line"> ${line.name} </div>`;
     });
     stopsList.innerHTML += `
-        <div class="stop" onclick="">
+        <div class="stop" onclick="setCurrentStop(${index})">
             <div class="header">
                 <div class="stopLetter">${indicator}</div>
                 <div class="info">
@@ -97,10 +149,10 @@ const showPosition = (position) => {
 };
 
 const addStopMarker = (index, lat, lng, mode) => {
-    addMarker(lat, lng, mode);
+    addMarker(index, lat, lng, mode);
 };
 
-const addMarker = (lat, lng, icon) => {
+const addMarker = (index, lat, lng, icon) => {
     if (map.getBounds().contains([lat, lng])) {
         var century21icon = L.icon({
             iconUrl:
@@ -112,7 +164,7 @@ const addMarker = (lat, lng, icon) => {
             icon: century21icon,
         });
 
-        marker.addTo(map); /*
+        marker.addTo(map).on("click", (e) => setCurrentStop(index)); /*
             .bindPopup(
                 "<p1><b>The White House</b><br>Landmark, historic home & office of the United States president, with tours for visitors.</p1>"
             )

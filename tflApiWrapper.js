@@ -1,5 +1,5 @@
 const getNearbyStops = async (lat, lon) => {
-    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/?lat=${lat}&lon=${lon}&stopTypes=TransportInterchange,NaptanMetroStation,NaptanRailStation,NaptanBusCoachStation,NaptanFerryPort,NaptanPublicBusCoachTram&modes=tube,bus,coach,overground,dlr,cable-car,national-rail,river-bus,river-tour,tram&returnLines=false&radius=1000`;
+    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/?lat=${lat}&lon=${lon}&stopTypes=TransportInterchange,NaptanMetroStation,NaptanRailStation,NaptanBusCoachStation,NaptanFerryPort,NaptanPublicBusCoachTram&modes=tube,bus,coach,overground,dlr,cable-car,national-rail,river-bus,river-tour,tram&radius=1000`;
     var response = await fetch(endpointUrl);
     var json = await response.json();
 
@@ -45,4 +45,22 @@ const getNearbyStops = async (lat, lon) => {
             mode: mode,
         };
     });
+};
+
+const getStopDepartures = async (stop) => {
+    var endpointUrl = `https://api.tfl.gov.uk/StopPoint/${stop.naptanId}/Arrivals`;
+    var response = await fetch(endpointUrl);
+    var json = await response.json();
+
+    return json
+        .map((e) => {
+            return {
+                name: e.lineName,
+                destination: e.destinationName,
+                mins: Math.round(
+                    (new Date(e.expectedArrival) - Date.now()) / 60000
+                ),
+            };
+        })
+        .sort((a, b) => b > a);
 };
