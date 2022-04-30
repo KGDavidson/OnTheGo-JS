@@ -35,12 +35,12 @@ body {
     width: 75vw;
 }
 
-.search {
-    width: 100%;
-}
-
 .topMenu {
     margin-bottom: 20px;
+}
+
+.topMenu button {
+    width: 100%;
 }
 
 .search:focus {
