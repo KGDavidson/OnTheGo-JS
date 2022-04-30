@@ -52,15 +52,17 @@ const getStopDepartures = async (stop) => {
     var response = await fetch(endpointUrl);
     var json = await response.json();
 
-    return json
-        .map((e) => {
-            return {
-                name: e.lineName,
-                destination: e.destinationName,
-                mins: Math.round(
-                    (new Date(e.expectedArrival) - Date.now()) / 60000
-                ),
-            };
-        })
-        .sort((a, b) => b > a);
+    var stopDepartures = json.map((e) => {
+        return {
+            name: e.lineName,
+            destination: e.destinationName,
+            mins: Math.round(
+                (new Date(e.expectedArrival) - Date.now()) / 60000
+            ),
+        };
+    });
+    stopDepartures.sort((a, b) => a.mins - b.mins);
+    console.log(stopDepartures);
+
+    return stopDepartures;
 };

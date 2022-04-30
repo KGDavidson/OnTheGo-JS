@@ -1,5 +1,6 @@
 var currentNearbyStops = [];
-var currentStop = -1;
+var currentStop = null;
+var intervalId;
 
 var map = L.map("map", {
     center: [51.507209, -0.127614],
@@ -57,7 +58,18 @@ const clearStopsList = () => {
     stopsList.innerHTML = "";
 };
 
+const unsetCurrentStop = () => {
+    intervalId == null ? null : clearInterval(intervalId);
+    currentStop = null;
+    document.getElementById("stopsList").style.display = "block";
+    document.getElementById("departures").style.display = "none";
+};
+
 const setCurrentStop = (index) => {
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+    console.log("updated");
     currentStop = currentNearbyStops[index];
     document.getElementById("stopsList").style.display = "none";
     document.getElementById("departures").style.display = "block";
@@ -68,10 +80,10 @@ const setCurrentStop = (index) => {
     currentStop.lines.forEach((line) => {
         linesHTML += `<div class="line"> ${line.name} </div>`;
     });
-    departures.innerHTML += `
+    departures.innerHTML = `
         <div class="stop">
             <div class="header">
-                <div class="stopLetter">${currentStop.indicator}</div>
+                <div class="back" onclick="unsetCurrentStop()">&#10094;</div>
                 <div class="info">
                     <div class="stopName"><span>${currentStop.name}</span></div>
                     <div class="towards">${currentStop.towards}</div>
@@ -88,10 +100,12 @@ const setCurrentStop = (index) => {
             addDeparturesToDeparturesList(
                 stop.name,
                 stop.destination,
-                stop.mins
+                stop.mins == 0 ? "due" : stop.mins + " mins"
             );
         });
     });
+
+    intervalId = setTimeout(setCurrentStop, 5000);
 };
 
 const addDeparturesToDeparturesList = (name, destination, mins) => {
@@ -100,9 +114,14 @@ const addDeparturesToDeparturesList = (name, destination, mins) => {
         <div class="departure">
             <div class="header">
                 <div class="info">
-                    <div class="stopName"><span>${name}</span></div>
+                    <div class="nameContainer">
+                        <div class="name">${name}</div><span></span>
+                    </div>
                     <div class="destination">${destination}</div>
                 </div>
+            </div>
+            <div class="mins">
+                ${mins}
             </div>
         </div>
     `;
@@ -133,6 +152,7 @@ const addStopToStopsList = (index, indicator, name, towards, lines) => {
 const getUserLocation = () => {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
+            unsetCurrentStop();
             map.setView(
                 [position.coords.latitude, position.coords.longitude],
                 map.zoom
