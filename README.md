@@ -20,7 +20,7 @@ A web app for viewing TFL departure times made using JavaScript and powered by t
 
 ## Demo
 
--   Demo available at https://onthego.my.to/
+-   Demo available at https://onthego-js.netlify.app/
 
 ---
 
