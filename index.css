@@ -1,248 +1,262 @@
-@keyframes stopListStopNameSroll {
-    0% {
-        transform: translateX(0);
-    }
+@keyframes stopListStopNameScroll {
+  0% {
+    transform: translateX(0);
+  }
 
-    100% {
-        transform: translateX(
-            min(0px, calc(-1 * (100% - (max(25vw, 400px) - 142px))))
-        );
-    }
+  100% {
+    transform: translateX(min(0px, calc(-1 * (100% - 19rem))));
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  z-index: 500;
+  position: absolute;
+  inset: 0;
+  font-size: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 1s linear infinite;
+  pointer-events: none;
+  color: #acacac;
 }
 
 .departures {
-    display: none;
+  display: none;
 }
 
 body {
-    margin: 0;
-    font-family: "Roboto", sans-serif;
-    display: flex;
-    flex-direction: row;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: row;
 }
 
 .sidebar {
-    height: 100vh;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    min-width: 400px;
+  height: 100vh;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-width: 400px;
 }
 
 .map {
-    height: 100vh;
-    width: 75vw;
+  height: 100vh;
+  width: 75vw;
 }
 
 .topMenu {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .topMenu button {
-    width: 100%;
+  width: 100%;
 }
 
 .search:focus {
-    outline: 0px;
+  outline: 0px;
 }
 
 ::placeholder {
-    color: black;
-    font-family: "Roboto Light", sans-serif;
+  color: black;
+  font-family: "Roboto Light", sans-serif;
 
-    opacity: 1;
+  opacity: 1;
 }
 
 :-ms-input-placeholder {
-    color: #c2c2c2;
+  color: #c2c2c2;
 }
 
 .stopsList {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .stopsList,
 .departures {
-    border-radius: 0.28571429rem;
-    width: max(calc(25vw - 40px), 360px);
-    border: 1px solid rgba(34, 36, 38, 0.15);
-    padding: 10px;
-    height: 100%;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  padding: 0.5rem;
+  height: 100%;
 }
 
 .stop {
-    padding: 5px 5px 5px 5px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    border-radius: 0.28571429rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.25rem;
 }
 
 .stop:hover {
-    box-shadow: 0 0 0.4em #dfe3f0;
+  box-shadow: 0 0 0.4em #dfe3f0;
 }
 
 .departures .stop:hover {
-    box-shadow: none;
-    cursor: default;
+  box-shadow: none;
+  cursor: default;
 }
 
 .stopLetter {
-    white-space: nowrap;
-    background-color: #f18c86;
-    padding: 5px;
-    min-height: 40px;
-    min-width: 40px;
-    height: 40px;
-    width: 40px;
-    display: inline-block;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
-    color: white;
-    font-family: "Roboto Black", sans-serif;
-    font-size: 14px;
+  white-space: nowrap;
+  background-color: #f18c86;
+  padding: 0.25rem;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  color: white;
+  font-family: "Roboto Black", sans-serif;
+  font-size: 1rem;
 }
 
 .header {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    padding-left: 20px;
+  padding-left: 0.5rem;
 }
 
 .stopName {
-    width: calc(max(25vw, 400px) - 142px);
-    height: auto;
-    overflow-x: hidden;
-    overflow-y: visible;
-    padding: 0;
+  overflow: hidden;
+  padding-right: 0.5rem;
 }
 
 .stopName span {
-    font-size: 20px;
-    position: relative;
-    overflow-x: visible;
-    overflow-y: visible;
-    white-space: nowrap;
-    display: inline-block;
+  font-size: 20px;
+  position: relative;
+  overflow-x: visible;
+  overflow-y: visible;
+  white-space: nowrap;
+  display: inline-block;
 }
 .stopName span:hover {
-    animation-name: stopListStopNameSroll;
-    animation-duration: 2s;
-    animation-timing-function: ease-out;
+  animation-name: stopListStopNameScroll;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 .towards {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .lines {
-    width: calc(max(25vw, 400px) - 82px);
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: visible;
-    position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
+  gap: 0.5rem;
 }
 
 .line {
-    margin: 5px 10px;
-    margin-left: 0px;
-    font-weight: bolder;
-    padding: 2px 7px;
-    background-color: #dfe3f0;
-    color: black;
-    border-radius: 0.28571429rem;
-    white-space: nowrap;
+  font-weight: bolder;
+  padding: 0.125rem 0.5rem;
+  background-color: #dfe3f0;
+  color: black;
+  border-radius: 0.28571429rem;
+  white-space: nowrap;
 }
 
 .lines::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: #f5f5f5;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #f5f5f5;
 }
 
 .lines::-webkit-scrollbar {
-    height: 5px;
-    background-color: #f5f5f5;
+  height: 5px;
+  background-color: #f5f5f5;
 }
 
 .lines::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    background-color: black;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: black;
 }
 
 .departure {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .departure .info {
-    padding-left: 10px;
+  padding-left: 1rem;
 }
 
 .departure .name {
-    margin: 5px 10px;
-    margin-left: 0px;
-    font-weight: bolder;
-    padding: 5px 10px;
-    background-color: #f18c86;
-    color: white;
-    width: auto;
-    border-radius: 0.28571429rem;
-    white-space: nowrap;
-    flex-shrink: 1;
+  margin: 0.25rem 0.5rem;
+  margin-left: 0px;
+  font-weight: bolder;
+  padding: 0.25rem 0.5rem;
+  background-color: #f18c86;
+  color: white;
+  width: auto;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  flex-shrink: 1;
 }
 
 .departure .info span {
-    flex-grow: 1;
-    height: 10px;
+  flex-grow: 1;
+  height: 0.5rem;
 }
 
 .departure .nameContainer {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: visible;
-    position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
 }
 
 .mins {
-    color: grey;
-    font-weight: bolder;
-    font-size: 15px;
-    margin-bottom: 20px;
+  color: grey;
+  font-weight: bolder;
+  font-size: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .back {
-    white-space: nowrap;
-    background-color: white;
-    min-height: 40px;
-    min-width: 40px;
-    height: 40px;
-    width: 40px;
-    display: inline-block;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
-    color: #f18c86;
-    font-family: "Roboto Black", sans-serif;
-    font-size: 40px;
+  white-space: nowrap;
+  background-color: white;
+  min-height: 1.5rem;
+  min-width: 40px;
+  height: 1.5rem;
+  width: 40px;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  color: #f18c86;
+  font-family: "Roboto Black", sans-serif;
+  font-size: 1.5rem;
 }
 
 .back:hover {
-    cursor: pointer;
-    color: #c2736f;
+  cursor: pointer;
+  color: #c2736f;
 }
